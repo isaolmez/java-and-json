@@ -1,4 +1,4 @@
-package com.isa.java.json.jackson.level2.date;
+package com.isa.java.json.jackson.level1.date;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;

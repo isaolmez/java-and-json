@@ -1,12 +1,9 @@
-package com.isa.java.json.jackson.level2.deserialize;
+package com.isa.java.json.jackson.level1.deserialize;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.IntNode;
-
 import java.io.IOException;
 
 public class ItemDeserializer extends StdDeserializer<Item> {
@@ -20,12 +17,11 @@ public class ItemDeserializer extends StdDeserializer<Item> {
     }
 
     @Override
-    public Item deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-            throws IOException, JsonProcessingException {
+    public Item deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        int id = (Integer) ((IntNode) node.get("id")).numberValue();
+        int id = (Integer) node.get("id").numberValue();
         String itemName = node.get("itemName").asText();
-        int userId = (Integer) ((IntNode) node.get("createdBy")).numberValue();
+        int userId = (Integer) node.get("createdBy").numberValue();
 
         return new Item(id, itemName, new User(userId, null));
     }

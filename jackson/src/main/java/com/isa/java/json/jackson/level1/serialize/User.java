@@ -1,4 +1,4 @@
-package com.isa.java.json.jackson.level2.deserialize;
+package com.isa.java.json.jackson.level1.serialize;
 
 public class User {
 

@@ -1,4 +1,4 @@
-package com.isa.java.json.jackson.level2.serialize;
+package com.isa.java.json.jackson.level1.serialize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;

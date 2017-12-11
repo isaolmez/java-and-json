@@ -1,6 +1,8 @@
-package com.isa.java.json.jackson.level2.deserialize;
+package com.isa.java.json.jackson.level1.deserialize;
 
-//@JsonDeserialize(using = ItemDeserializer.class)
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(using = ItemDeserializer.class)
 public class Item {
 
     private int id;
@@ -8,6 +10,9 @@ public class Item {
     private String itemName;
 
     private User owner;
+
+    public Item() {
+    }
 
     public Item(int id, String itemName, User owner) {
         this.id = id;

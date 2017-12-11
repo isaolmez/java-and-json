@@ -1,6 +1,8 @@
-package com.isa.java.json.jackson.level2.serialize;
+package com.isa.java.json.jackson.level1.serialize;
 
-//@JsonSerialize(using = ItemSerializer.class)
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize(using = ItemSerializer.class)
 public class Item {
 
     private int id;
