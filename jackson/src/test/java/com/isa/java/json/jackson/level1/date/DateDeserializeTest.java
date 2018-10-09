@@ -27,6 +27,7 @@ public class DateDeserializeTest {
         String json = "{\"date\":\"2017-06-08'T'00:00:00+08:00\"}";
 
         TestClass actual = mapper.readValue(json, TestClass.class);
+        
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(actual.getDate());
         assertThat(calendar.get(Calendar.YEAR)).isEqualTo(2017);

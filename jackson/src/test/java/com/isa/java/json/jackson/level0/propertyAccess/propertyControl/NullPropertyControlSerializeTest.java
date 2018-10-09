@@ -12,7 +12,7 @@ import org.junit.Test;
 public class NullPropertyControlSerializeTest extends BaseJacksonTest {
 
     @Test
-    public void shouldSerialize_WithIgnoreOnProperty() throws JsonProcessingException {
+    public void shouldSerialize_WithNonNullInclusion_OnClass() throws JsonProcessingException {
 
         @JsonInclude(Include.NON_NULL)
         @Data
@@ -30,7 +30,7 @@ public class NullPropertyControlSerializeTest extends BaseJacksonTest {
     }
 
     @Test
-    public void shouldSerialize_WithIgnoreOnProperty2() throws JsonProcessingException {
+    public void shouldSerialize_WithNonNullInclusion_OnMapper() throws JsonProcessingException {
 
         @Data
         class Car {

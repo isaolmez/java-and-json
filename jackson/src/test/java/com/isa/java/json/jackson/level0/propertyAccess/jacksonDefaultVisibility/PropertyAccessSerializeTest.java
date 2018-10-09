@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class PropertyAccessSerializeTest extends BaseJacksonTest {
 
-    @Test
+    @Test(expected = JsonProcessingException.class)
     public void shouldNotSerialize_WithPrivateFields() throws JsonProcessingException {
         PrivatePerson privatePerson = new PrivatePerson("john", 21);
 
