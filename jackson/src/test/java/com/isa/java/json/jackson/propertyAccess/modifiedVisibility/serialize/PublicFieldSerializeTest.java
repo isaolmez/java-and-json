@@ -12,32 +12,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PublicFieldSerializeTest extends BaseJacksonTest {
 
     @Test
-    public void shouldNotSerialize_PublicFields() throws JsonProcessingException {
+    public void shouldSerialize_PublicFields() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             public int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
 
     @Test
-    public void shouldSerialize_PublicFields() throws JsonProcessingException {
+    public void shouldSerialize_PublicFields2() throws JsonProcessingException {
 
         @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-        class Car {
+        class Person {
 
             public int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -45,15 +45,15 @@ public class PublicFieldSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PublicFields_ViaWriter() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             public int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -61,7 +61,7 @@ public class PublicFieldSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PublicFields_WithPrioritizingGetter() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             public int age = 12;
 
@@ -70,9 +70,9 @@ public class PublicFieldSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":999}");
     }

@@ -42,14 +42,14 @@ public class PrivateFieldSerializeTest extends BaseJacksonTest {
     public void shouldSerialize_PrivateFields() throws JsonProcessingException {
 
         @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-        class Car {
+        class Person {
 
             private int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -57,15 +57,15 @@ public class PrivateFieldSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PrivateFields_ViaWriter() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }

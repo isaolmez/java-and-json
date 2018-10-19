@@ -14,7 +14,7 @@ public class PrivateGetterSerializeTest extends BaseJacksonTest {
     @Test(expected = JsonProcessingException.class)
     public void shouldNotSerialize_PrivateGetters() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -23,16 +23,16 @@ public class PrivateGetterSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        objectMapper.writeValueAsString(car);
+        objectMapper.writeValueAsString(person);
     }
 
     @Test
     public void shouldSerialize_PrivateGetters() throws JsonProcessingException {
 
         @JsonAutoDetect(getterVisibility = Visibility.ANY)
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -41,9 +41,9 @@ public class PrivateGetterSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -51,7 +51,7 @@ public class PrivateGetterSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PrivateGetters_ViaWriter() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -60,10 +60,10 @@ public class PrivateGetterSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setVisibility(PropertyAccessor.GETTER, Visibility.ANY);
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }

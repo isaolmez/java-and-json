@@ -14,28 +14,28 @@ public class PackagePrivateFieldSerializeTest extends BaseJacksonTest {
     @Test(expected = JsonProcessingException.class)
     public void shouldNotSerialize_PackagePrivateFields_Default() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        objectMapper.writeValueAsString(car);
+        objectMapper.writeValueAsString(person);
     }
 
     @Test
     public void shouldSerialize_PackagePrivateFields() throws JsonProcessingException {
 
         @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-        class Car {
+        class Person {
 
             int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -44,7 +44,7 @@ public class PackagePrivateFieldSerializeTest extends BaseJacksonTest {
     public void shouldSerialize_WhilePrioritizingGetter() throws JsonProcessingException {
 
         @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-        class Car {
+        class Person {
 
             int age = 12;
 
@@ -53,9 +53,9 @@ public class PackagePrivateFieldSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":13}");
     }
@@ -63,15 +63,15 @@ public class PackagePrivateFieldSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PackagePrivateFields_ViaWriter() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -79,14 +79,14 @@ public class PackagePrivateFieldSerializeTest extends BaseJacksonTest {
     @Test(expected = JsonProcessingException.class)
     public void shouldNotSerialize_PackagePrivateFields() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.PROTECTED_AND_PUBLIC);
-        objectMapper.writeValueAsString(car);
+        objectMapper.writeValueAsString(person);
     }
 }

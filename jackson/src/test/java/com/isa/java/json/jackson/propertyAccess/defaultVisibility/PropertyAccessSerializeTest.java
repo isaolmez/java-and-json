@@ -3,6 +3,7 @@ package com.isa.java.json.jackson.propertyAccess.defaultVisibility;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.isa.java.json.jackson.BaseJacksonTest;
 import org.junit.Test;
 
@@ -13,6 +14,16 @@ public class PropertyAccessSerializeTest extends BaseJacksonTest {
         PrivatePerson privatePerson = new PrivatePerson("john", 21);
 
         objectMapper.writeValueAsString(privatePerson);
+    }
+
+    @Test
+    public void shouldSerialize_WithPrivateFields_WhenConfigured() throws JsonProcessingException {
+        PrivatePerson privatePerson = new PrivatePerson("john", 21);
+
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        String json = objectMapper.writeValueAsString(privatePerson);
+
+        assertThat(json).isEqualTo("{}");
     }
 
     @Test(expected = JsonProcessingException.class)

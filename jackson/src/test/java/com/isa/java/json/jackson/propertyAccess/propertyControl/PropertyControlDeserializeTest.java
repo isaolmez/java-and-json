@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.isa.java.json.jackson.BaseJacksonTest;
 import java.io.IOException;
-import lombok.Data;
 import org.junit.Test;
 
 public class PropertyControlDeserializeTest extends BaseJacksonTest {
@@ -17,7 +16,7 @@ public class PropertyControlDeserializeTest extends BaseJacksonTest {
     public void shouldDeserialize_WithMissing() throws IOException {
         final String json = "{\"age\":12}";
 
-        Fish deserialized = objectMapper.readValue(json, Fish.class);
+        Person deserialized = objectMapper.readValue(json, Person.class);
 
         assertThat(deserialized.getName()).isNull();
         assertThat(deserialized.getAge()).isEqualTo(12);
@@ -27,7 +26,7 @@ public class PropertyControlDeserializeTest extends BaseJacksonTest {
     public void shouldNotDeserialize_WithUnknown() throws IOException {
         final String json = "{\"age\":12,\"weight\":99}";
 
-        objectMapper.readValue(json, Fish.class);
+        objectMapper.readValue(json, Person.class);
     }
 
     @Test
@@ -35,7 +34,7 @@ public class PropertyControlDeserializeTest extends BaseJacksonTest {
         final String json = "{\"age\":12,\"weight\":99}";
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        Fish deserialized = objectMapper.readValue(json, Fish.class);
+        Person deserialized = objectMapper.readValue(json, Person.class);
 
         assertThat(deserialized.getName()).isNull();
         assertThat(deserialized.getAge()).isEqualTo(12);
@@ -45,7 +44,7 @@ public class PropertyControlDeserializeTest extends BaseJacksonTest {
     public void shouldDeserialize_WithUnknown_ViaClass() throws IOException {
         final String json = "{\"age\":12,\"weight\":99}";
 
-        FishWithControl deserialized = objectMapper.readValue(json, FishWithControl.class);
+        PersonWithControl deserialized = objectMapper.readValue(json, PersonWithControl.class);
 
         assertThat(deserialized.getName()).isNull();
         assertThat(deserialized.getAge()).isEqualTo(12);
@@ -53,9 +52,9 @@ public class PropertyControlDeserializeTest extends BaseJacksonTest {
 
     @Test
     public void shouldNotDeserialize_IgnoredOnProperty() throws IOException {
-        final String json = "{\"name\":\"nemo\",\"age\":12}";
+        final String json = "{\"name\":\"John\",\"age\":12}";
 
-        FishWithIgnoreOnProperty deserialized = objectMapper.readValue(json, FishWithIgnoreOnProperty.class);
+        PersonWithIgnoreOnProperty deserialized = objectMapper.readValue(json, PersonWithIgnoreOnProperty.class);
 
         assertThat(deserialized.getName()).isNull();
         assertThat(deserialized.getAge()).isEqualTo(12);
@@ -63,42 +62,102 @@ public class PropertyControlDeserializeTest extends BaseJacksonTest {
 
     @Test
     public void shouldNotDeserialize_IgnoredOnClass() throws IOException {
-        final String json = "{\"name\":\"nemo\",\"age\":12}";
+        final String json = "{\"name\":\"John\",\"age\":12}";
 
-        FishWithIgnoreOnClass deserialized = objectMapper.readValue(json, FishWithIgnoreOnClass.class);
+        PersonWithIgnoreOnClass deserialized = objectMapper.readValue(json, PersonWithIgnoreOnClass.class);
 
         assertThat(deserialized.getName()).isNull();
         assertThat(deserialized.getAge()).isEqualTo(12);
     }
 
-    @Data
-    static class Fish {
+    static class Person {
 
         private String name;
         private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 
-    @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static class FishWithControl {
+    static class PersonWithControl {
 
         private String name;
         private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 
-    @Data
-    static class FishWithIgnoreOnProperty {
+    static class PersonWithIgnoreOnProperty {
 
         @JsonIgnore
         private String name;
         private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 
-    @Data
     @JsonIgnoreProperties(value = "name")
-    static class FishWithIgnoreOnClass {
+    static class PersonWithIgnoreOnClass {
 
         private String name;
         private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 }

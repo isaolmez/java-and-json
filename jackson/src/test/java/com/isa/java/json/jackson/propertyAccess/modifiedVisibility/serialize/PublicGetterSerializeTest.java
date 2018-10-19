@@ -11,7 +11,7 @@ public class PublicGetterSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PublicGetters() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -20,9 +20,9 @@ public class PublicGetterSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -30,7 +30,7 @@ public class PublicGetterSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_PublicGetters_AdditionalMethod() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -43,9 +43,9 @@ public class PublicGetterSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12,\"additional\":12}");
     }

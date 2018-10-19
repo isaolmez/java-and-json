@@ -1,10 +1,5 @@
 package com.isa.java.json.jackson.propertyAccess.defaultVisibility;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class CustomGetterSetterPerson {
 
     private String name;
@@ -20,5 +15,17 @@ public class CustomGetterSetterPerson {
 
     public void setName(String name) {
         this.name = "constant";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

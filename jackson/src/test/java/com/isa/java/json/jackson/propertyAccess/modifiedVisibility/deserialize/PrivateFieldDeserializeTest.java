@@ -16,14 +16,14 @@ public class PrivateFieldDeserializeTest extends BaseJacksonTest {
     public void shouldNotDeserialize_WithPrivateFields() throws IOException {
         final String json = "{\"age\":12}";
 
-        objectMapper.readValue(json, Car.class);
+        objectMapper.readValue(json, Person.class);
     }
 
     @Test
     public void shouldDeserialize_WithPrivateFields() throws IOException {
         final String json = "{\"age\":12}";
 
-        CarWithAnnotation deserialized = objectMapper.readValue(json, CarWithAnnotation.class);
+        PersonWithAnnotation deserialized = objectMapper.readValue(json, PersonWithAnnotation.class);
 
         assertThat(deserialized.age).isEqualTo(12);
     }
@@ -33,7 +33,7 @@ public class PrivateFieldDeserializeTest extends BaseJacksonTest {
         final String json = "{\"age\":12}";
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-        Car deserialized = objectMapper.readValue(json, Car.class);
+        Person deserialized = objectMapper.readValue(json, Person.class);
 
         assertThat(deserialized.age).isEqualTo(12);
     }
@@ -43,24 +43,24 @@ public class PrivateFieldDeserializeTest extends BaseJacksonTest {
         final String json = "{\"age\":12}";
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-        CarWithSetter deserialized = objectMapper.readValue(json, CarWithSetter.class);
+        PersonWithSetter deserialized = objectMapper.readValue(json, PersonWithSetter.class);
 
         assertThat(deserialized.age).isEqualTo(999);
     }
 
-    static class Car {
+    static class Person {
 
         private int age;
     }
 
     @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-    static class CarWithAnnotation {
+    static class PersonWithAnnotation {
 
         private int age;
     }
 
     @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-    static class CarWithSetter {
+    static class PersonWithSetter {
 
         private int age;
 

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.isa.java.json.jackson.BaseJacksonTest;
-import lombok.Data;
 import org.junit.Test;
 
 public class NullPropertyControlSerializeTest extends BaseJacksonTest {
@@ -15,16 +14,23 @@ public class NullPropertyControlSerializeTest extends BaseJacksonTest {
     public void shouldSerialize_WithNonNullInclusion_OnClass() throws JsonProcessingException {
 
         @JsonInclude(Include.NON_NULL)
-        @Data
-        class Car {
+        class Person {
 
             private String name;
             private int age = 12;
+
+            public String getName() {
+                return name;
+            }
+
+            public int getAge() {
+                return age;
+            }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -32,17 +38,24 @@ public class NullPropertyControlSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_WithNonNullInclusion_OnMapper() throws JsonProcessingException {
 
-        @Data
-        class Car {
+        class Person {
 
             private String name;
             private int age = 12;
+
+            public String getName() {
+                return name;
+            }
+
+            public int getAge() {
+                return age;
+            }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setSerializationInclusion(Include.NON_NULL);
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }

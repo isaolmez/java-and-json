@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.isa.java.json.jackson.BaseJacksonTest;
 import java.io.IOException;
-import lombok.Data;
 import org.junit.Test;
 
 public class PropertyControlSerializeTest extends BaseJacksonTest {
@@ -15,7 +14,7 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_WithIgnoreOnProperty() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -29,9 +28,9 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -39,7 +38,7 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_WithIgnoreOnProperty2() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             @JsonIgnore
             private int age = 12;
@@ -53,9 +52,9 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"additional\":12}");
     }
@@ -63,7 +62,7 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
     @Test
     public void shouldSerialize_WithIgnoreOnProperty3() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -77,9 +76,9 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"additional\":12}");
     }
@@ -88,16 +87,31 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
     public void shouldSerialize_WithIgnoreOnClass() throws JsonProcessingException {
 
         @JsonIgnoreProperties("name")
-        @Data
-        class Car {
+        class Person {
 
             private int age = 12;
             private String name = "john";
+
+            public int getAge() {
+                return age;
+            }
+
+            public void setAge(int age) {
+                this.age = age;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
     }
@@ -106,16 +120,31 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
     public void shouldSerialize_WithIgnoreOnClass2() throws IOException {
 
         @JsonIgnoreProperties(value = "name", allowGetters = true)
-        @Data
-        class Car {
+        class Person {
 
             private int age = 12;
             private String name = "john";
+
+            public int getAge() {
+                return age;
+            }
+
+            public void setAge(int age) {
+                this.age = age;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12,\"name\":\"john\"}");
     }

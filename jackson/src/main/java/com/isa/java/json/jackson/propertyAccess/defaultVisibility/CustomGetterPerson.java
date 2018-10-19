@@ -1,9 +1,7 @@
 package com.isa.java.json.jackson.propertyAccess.defaultVisibility;
 
-import lombok.Getter;
 import lombok.ToString;
 
-@Getter
 @ToString
 public class CustomGetterPerson {
 
@@ -22,7 +20,15 @@ public class CustomGetterPerson {
         return 999;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getPreviousAge() {
         return age - 1;
+    }
+
+    public int nextAge() {
+        return age + 1;
     }
 }
