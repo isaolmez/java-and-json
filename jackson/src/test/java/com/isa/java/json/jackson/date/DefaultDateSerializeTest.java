@@ -22,20 +22,12 @@ public class DefaultDateSerializeTest {
     }
 
     @Test
-    public void shouldNotSerializeSqlDateAsTimestamp() throws JsonProcessingException {
+    public void shouldSerializeSqlDateAsTimestamp() throws JsonProcessingException {
         long now = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(now);
 
         String serialized = mapper.writeValueAsString(date);
 
-        assertThat(serialized).isNotEqualToIgnoringCase(String.valueOf(now));
-    }
-
-    @Test
-    public void shouldSerializeSqlDateAsDateString() throws JsonProcessingException {
-        long now = System.currentTimeMillis();
-        java.sql.Date date = new java.sql.Date(now);
-
-        String serialized = mapper.writeValueAsString(date);
+        assertThat(serialized).isEqualTo(String.valueOf(now));
     }
 }

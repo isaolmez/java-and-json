@@ -115,7 +115,7 @@ public class DefaultDateDeserializeTest {
         System.out.println(mapper.getDeserializationConfig().getTimeZone());
         java.util.Date deserialized = mapper.readValue(dateString, java.util.Date.class);
 
-        assertDateIsCorrect(deserialized, "2017-12-24 13:39:32+0300");
+        assertDateIsCorrect(deserialized, "2017-12-24 16:39:32+0300");
     }
 
     @Test
