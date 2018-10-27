@@ -14,28 +14,28 @@ public class PrivateFieldSerializeTest extends BaseJacksonTest {
     @Test(expected = JsonProcessingException.class)
     public void shouldNotSerialize_PrivateFields_Default() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        objectMapper.writeValueAsString(car);
+        objectMapper.writeValueAsString(person);
     }
 
     @Test(expected = JsonProcessingException.class)
     public void shouldNotSerialize_PrivateFields() throws JsonProcessingException {
 
-        class Car {
+        class Person {
 
             private int age = 12;
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
         objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.NON_PRIVATE);
-        objectMapper.writeValueAsString(car);
+        objectMapper.writeValueAsString(person);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class PrivateFieldSerializeTest extends BaseJacksonTest {
     public void shouldSerialize_PrivateFields_AndGetter() throws JsonProcessingException {
 
         @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-        class Car {
+        class Person {
 
             private int age = 12;
 
@@ -83,9 +83,9 @@ public class PrivateFieldSerializeTest extends BaseJacksonTest {
             }
         }
 
-        Car car = new Car();
+        Person person = new Person();
 
-        String json = objectMapper.writeValueAsString(car);
+        String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":999}");
     }
