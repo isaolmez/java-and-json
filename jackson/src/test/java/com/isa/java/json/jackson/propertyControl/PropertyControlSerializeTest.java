@@ -1,4 +1,4 @@
-package com.isa.java.json.jackson.propertyAccess.propertyControl;
+package com.isa.java.json.jackson.propertyControl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +12,55 @@ import org.junit.Test;
 public class PropertyControlSerializeTest extends BaseJacksonTest {
 
     @Test
+    public void shouldSerialize_WithIgnoreOnField() throws JsonProcessingException {
+
+        class Person {
+
+            @JsonIgnore
+            private int age = 12;
+
+            public int getAge() {
+                return age;
+            }
+
+            public int getAdditional() {
+                return age;
+            }
+        }
+
+        Person person = new Person();
+
+        String json = objectMapper.writeValueAsString(person);
+
+        assertThat(json).isEqualTo("{\"additional\":12}");
+    }
+
+    @Test
     public void shouldSerialize_WithIgnoreOnProperty() throws JsonProcessingException {
+
+        class Person {
+
+            private int age = 12;
+
+            @JsonIgnore
+            public int getAge() {
+                return age;
+            }
+
+            public int getAdditional() {
+                return age;
+            }
+        }
+
+        Person person = new Person();
+
+        String json = objectMapper.writeValueAsString(person);
+
+        assertThat(json).isEqualTo("{\"additional\":12}");
+    }
+    
+    @Test
+    public void shouldSerialize_WithIgnoreOnAdditionalProperty() throws JsonProcessingException {
 
         class Person {
 
@@ -33,54 +81,6 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
         String json = objectMapper.writeValueAsString(person);
 
         assertThat(json).isEqualTo("{\"age\":12}");
-    }
-
-    @Test
-    public void shouldSerialize_WithIgnoreOnProperty2() throws JsonProcessingException {
-
-        class Person {
-
-            @JsonIgnore
-            private int age = 12;
-
-            public int getAge() {
-                return age;
-            }
-
-            public int getAdditional() {
-                return age;
-            }
-        }
-
-        Person person = new Person();
-
-        String json = objectMapper.writeValueAsString(person);
-
-        assertThat(json).isEqualTo("{\"additional\":12}");
-    }
-
-    @Test
-    public void shouldSerialize_WithIgnoreOnProperty3() throws JsonProcessingException {
-
-        class Person {
-
-            private int age = 12;
-
-            @JsonIgnore
-            public int getAge() {
-                return age;
-            }
-
-            public int getAdditional() {
-                return age;
-            }
-        }
-
-        Person person = new Person();
-
-        String json = objectMapper.writeValueAsString(person);
-
-        assertThat(json).isEqualTo("{\"additional\":12}");
     }
 
     @Test
@@ -117,7 +117,7 @@ public class PropertyControlSerializeTest extends BaseJacksonTest {
     }
 
     @Test
-    public void shouldSerialize_WithIgnoreOnClass2() throws IOException {
+    public void shouldSerialize_WithIgnoreOnClass_AndAllowingGetters() throws IOException {
 
         @JsonIgnoreProperties(value = "name", allowGetters = true)
         class Person {

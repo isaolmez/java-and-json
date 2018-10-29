@@ -1,4 +1,4 @@
-package com.isa.java.json.jackson.propertyAccess.propertyControl;
+package com.isa.java.json.jackson.propertyControl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
