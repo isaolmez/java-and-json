@@ -43,7 +43,7 @@ public class PropertyAccessDeserializeTest extends BaseJacksonTest {
     }
 
     @Test
-    public void shouldDeserialize_WithPublicFields_LessMapping() throws IOException {
+    public void shouldDeserialize_WithPublicFields_AndLessMapping() throws IOException {
         final String someJson = "{\"age\":21}";
 
         PublicPerson deserialized = objectMapper.readValue(someJson, PublicPerson.class);
@@ -70,7 +70,7 @@ public class PropertyAccessDeserializeTest extends BaseJacksonTest {
     }
 
     @Test
-    public void shouldDeserialize_WithGetters_LessMapping() throws IOException {
+    public void shouldDeserialize_WithGetters_AndLessMapping() throws IOException {
         final String someJson = "{\"age\":21}";
 
         GetterPerson deserialized = objectMapper.readValue(someJson, GetterPerson.class);
@@ -97,7 +97,7 @@ public class PropertyAccessDeserializeTest extends BaseJacksonTest {
     }
 
     @Test
-    public void shouldDeserialize_WithGetterSetters_LessMapping() throws IOException {
+    public void shouldDeserialize_WithGetterSetters_AndLessMapping() throws IOException {
         final String someJson = "{\"age\":21}";
 
         GetterSetterPerson deserialized = objectMapper.readValue(someJson, GetterSetterPerson.class);

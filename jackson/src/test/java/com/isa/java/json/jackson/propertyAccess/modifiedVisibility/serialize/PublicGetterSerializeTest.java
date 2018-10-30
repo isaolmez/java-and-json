@@ -28,7 +28,7 @@ public class PublicGetterSerializeTest extends BaseJacksonTest {
     }
 
     @Test
-    public void shouldSerialize_PublicGetters_AdditionalMethod() throws JsonProcessingException {
+    public void shouldSerialize_PublicGetters_AndAdditionalMethod() throws JsonProcessingException {
 
         class Person {
 
