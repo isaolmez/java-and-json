@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class CustomDateSerializer extends StdSerializer<Date> {
 
@@ -20,7 +21,9 @@ public class CustomDateSerializer extends StdSerializer<Date> {
 
     @Override
     public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ssZZZ");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
         jsonGenerator.writeString(dateFormat.format(date));
     }
 }
