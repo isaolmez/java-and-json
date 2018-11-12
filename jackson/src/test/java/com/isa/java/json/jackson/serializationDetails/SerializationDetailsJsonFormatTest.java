@@ -1,4 +1,4 @@
-package com.isa.java.json.jackson.deserializationDetails;
+package com.isa.java.json.jackson.serializationDetails;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +14,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeserializationDetailsJsonFormatTest extends BaseJacksonTest {
+public class SerializationDetailsJsonFormatTest extends BaseJacksonTest {
 
     private Date birthDate;
 

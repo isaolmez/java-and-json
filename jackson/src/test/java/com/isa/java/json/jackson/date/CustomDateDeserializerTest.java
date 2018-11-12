@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DateDeserializeTest {
+public class CustomDateDeserializerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -24,12 +24,12 @@ public class DateDeserializeTest {
 
     @Test
     public void shouldDeserialize() throws IOException {
-        String json = "{\"date\":\"2017-06-08'T'00:00:00+08:00\"}";
+        String json = "{\"birthDate\":\"2017-06-08'T'00:00:00+08:00\"}";
 
-        TestClass actual = mapper.readValue(json, TestClass.class);
-        
+        Person person = mapper.readValue(json, Person.class);
+
         Calendar calendar = GregorianCalendar.getInstance();
-        calendar.setTime(actual.getDate());
+        calendar.setTime(person.getBirthDate());
         assertThat(calendar.get(Calendar.YEAR)).isEqualTo(2017);
         assertThat(calendar.get(Calendar.MONTH)).isEqualTo(5);
         assertThat(calendar.get(Calendar.DAY_OF_MONTH)).isEqualTo(8);
@@ -39,18 +39,18 @@ public class DateDeserializeTest {
 
     }
 
-    private static class TestClass {
+    private static class Person {
 
-        @JsonDeserialize(using = DateDeserializer.class)
-        private Date date;
+        @JsonDeserialize(using = CustomDateDeserializer.class)
+        private Date birthDate;
 
-        public Date getDate() {
-            return date;
+        public Date getBirthDate() {
+            return birthDate;
         }
 
         @JsonFormat(pattern = "yyyy-mm-dd'T'HH:mm:ssXXX")
-        public void setDate(Date date) {
-            this.date = date;
+        public void setBirthDate(Date birthDate) {
+            this.birthDate = birthDate;
         }
     }
 }

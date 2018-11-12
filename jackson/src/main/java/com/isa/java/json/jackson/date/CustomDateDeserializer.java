@@ -9,13 +9,13 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
-public class DateDeserializer extends StdDeserializer<Date> {
+public class CustomDateDeserializer extends StdDeserializer<Date> {
 
-    public DateDeserializer() {
+    public CustomDateDeserializer() {
         this(null);
     }
 
-    public DateDeserializer(Class<?> vc) {
+    public CustomDateDeserializer(Class<?> vc) {
         super(vc);
     }
 
@@ -30,13 +30,10 @@ public class DateDeserializer extends StdDeserializer<Date> {
             sanitized = dateString.substring(0, 10);
         }
 
-        Date result = null;
         try {
-            result = DateUtils.parseDate(sanitized, formatWithZone, formatWithoutZone, formatWithoutTime);
+            return DateUtils.parseDate(sanitized, formatWithZone, formatWithoutZone, formatWithoutTime);
         } catch (ParseException e) {
             throw new RuntimeException("Cannot parse " + dateString);
         }
-
-        return result;
     }
 }
