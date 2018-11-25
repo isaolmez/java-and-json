@@ -12,3 +12,5 @@ Some implementations are detailed in following blog posts:
 - http://www.javabyexamples.com/control-how-jackson-serializes-null-values/
 - http://www.javabyexamples.com/jackson-can-serialize-private-fields/
 - http://www.javabyexamples.com/how-to-ignore-property-only-for-serialization-with-jackson/
+- http://www.javabyexamples.com/how-to-format-date-for-serialization-with-jackson/
+- http://www.javabyexamples.com/how-to-change-property-name-with-jackson/
